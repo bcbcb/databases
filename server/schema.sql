@@ -1,27 +1,30 @@
-CREATE DATABASE chat;
+drop database chat;
 
-USE chat;
+create database chat;
+use chat;
 
-CREATE TABLE messages (
-  id smallint,
-  user smallint,
-  message_text varchar(500),
+create table messages (
+  msg_id int not null auto_increment,
+  user varchar(25),
+  msg_text varchar(500),
   time datetime,
-  room smallint
+  room varchar(25),
+  primary key( msg_id )
 );
 
-CREATE TABLE users (
-  id smallint,
-  username varchar(25)
+create table users (
+  user_id int not null auto_increment,
+  username varchar(25),
+  primary key( user_id )
 );
 
-CREATE TABLE rooms (
-  id smallint,
-  roomname varchar(25)
+create table rooms (
+  room_id int not null auto_increment,
+  roomname varchar(25),
+  primary key( room_id )
 );
 
-
-/*  Execute this file from the command line by typing:
+/*  execute this file from the command line by typing:
  *    mysql -u root < server/schema.sql
  *  to create the database and the tables.*/
 

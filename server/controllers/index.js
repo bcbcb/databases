@@ -6,12 +6,18 @@ var bluebird = require('bluebird');
 module.exports = {
   messages: {
     get: function (req, res) {
-    // a function which handles a get request for all messages
-      models.messages.get( req, res );
+      var get = bluebird.promisify( models.messages.get );
+      get( req, res)
+      .then(console.log("PROMISE WORKS!!!!"));
+
     },
     post: function (req, res) {
       // tell model to create new message
-      models.messages.post( req.body );
+      var post = bluebird.promisify( models.messages.post );
+      post( req.body )
+        .then (res.send('posted message'))
+        .then (console.log('it worked'));
+
       // console.log(req.body);
     }
   },
@@ -24,6 +30,9 @@ module.exports = {
     post: function (req, res) {
       // tell model to create new user
       models.users.post(req.body);
+      console.log('posting to user')
+      res.send('posted user');
+
     }
   }
 };

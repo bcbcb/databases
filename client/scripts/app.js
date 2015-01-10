@@ -20,7 +20,7 @@ app.fetch = function (room) {
     type: 'GET',
     data: {
       order: "-createdAt",
-      where: { "roomname": room }
+      where: { "room": room }
     },
     success: function (data) {
       app.messages = data.results;
@@ -45,7 +45,7 @@ app.getRooms = function () {
   var roomStorage = function (data) {
 
     for (var key in data) {
-      var roomName = app.escapeHtml(data[key]['roomname']);
+      var roomName = app.escapeHtml(data[key]['room']);
 
       if (rooms[roomName] === undefined) {
         rooms[roomName] = true;
@@ -77,18 +77,18 @@ app.send = function (message) {
 
 
 app.addMessage = function (message) {
-  $('#chats').prepend("<li class='list-group-item'>" + "<strong class='username'>" + app.escapeHtml(message.username) + "</strong>: " + app.escapeHtml(message.text)  + "</li>");
+  $('#chats').prepend("<li class='list-group-item'>" + "<strong class='username'>" + app.escapeHtml(message.user) + "</strong>: " + app.escapeHtml(message.msg_text)  + "</li>");
 };
 
 app.displayMessages = function () {
   app.clearMessages();
   var elements = [];
   for (var i = 0; i < app.messages.length; i++) {
-    if (app.messages[i]['username'] !== undefined) {
-      if (app.friends.indexOf(app.messages[i]['username']) > -1) {
-        elements.push("<li class='list-group-item friend'>" + "<strong class='username'>" + app.escapeHtml(app.messages[i]['username']) + "</strong>: " + app.escapeHtml(app.messages[i]['text']) + "</li>");
+    if (app.messages[i]['user'] !== undefined) {
+      if (app.friends.indexOf(app.messages[i]['user']) > -1) {
+        elements.push("<li class='list-group-item friend'>" + "<strong class='username'>" + app.escapeHtml(app.messages[i]['user']) + "</strong>: " + app.escapeHtml(app.messages[i]['msg_text']) + "</li>");
       } else {
-        elements.push("<li class='list-group-item'>" + "<strong class='username'>" + app.escapeHtml(app.messages[i]['username']) + "</strong>: " + app.escapeHtml(app.messages[i]['text']) + "</li>");
+        elements.push("<li class='list-group-item'>" + "<strong class='username'>" + app.escapeHtml(app.messages[i]['user']) + "</strong>: " + app.escapeHtml(app.messages[i]['msg_text']) + "</li>");
       }
     }
   }
@@ -144,9 +144,9 @@ app.handleSubmit = function () {
   var text = $('#message').val();
 
   var message = {
-    'username' : username,
-    'text' : text,
-    'roomname' : app.room
+    'user' : username,
+    'msg_text' : text,
+    'room' : app.room
   };
   app.send(message);
   $('#message').val('');

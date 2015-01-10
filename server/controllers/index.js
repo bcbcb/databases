@@ -8,12 +8,13 @@ module.exports = {
     get: function (req, res) {
       var get = bluebird.promisify( models.messages.get );
       get( req, res)
-      .then(console.log("PROMISE WORKS!!!!"));
+        .then(console.log("PROMISE WORKS!!!!"));
 
     },
     post: function (req, res) {
       // tell model to create new message
       var post = bluebird.promisify( models.messages.post );
+      console.log( req.body)
       post( req.body )
         .then (res.send('posted message'))
         .then (console.log('it worked'));

@@ -1,7 +1,7 @@
-drop database if exists schat;
+drop database if exists chat;
 
-create database schat;
-use schat;
+create database chat;
+use chat;
 
 create table messages (
   msg_id int not null auto_increment,

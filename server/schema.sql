@@ -1,4 +1,4 @@
-drop database chat;
+drop database if exists chat;
 
 create database chat;
 use chat;

@@ -3,23 +3,21 @@ CREATE DATABASE chat;
 USE chat;
 
 CREATE TABLE messages (
-  /* Describe your table here.*/
   id smallint,
   user smallint,
   message_text varchar(500),
-  time timestamp;
-  room smallint;
+  time datetime,
+  room smallint
 );
 
-/* Create other tables and define schemas for them here! */
 CREATE TABLE users (
   id smallint,
-  username varchar(25);
+  username varchar(25)
 );
 
 CREATE TABLE rooms (
   id smallint,
-  roomname varchar(25);
+  roomname varchar(25)
 );
 
 
